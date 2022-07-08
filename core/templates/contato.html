@@ -1,0 +1,40 @@
+{% load bootstrap4 %}
+<!-- importando o bootstrap -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+    {% bootstrap_css %}
+    <!-- Carregando o css do bootstrap -->
+</head>
+<body>
+    <div class="container">
+        <h1 class="fs-3">Contato</h1>
+        {% bootstrap_messages %}
+        <!-- Imagine que vc tem um formulário e tem um botão para submeter um e-mail. Se o 
+        email for submetido com sucesso você quer que exiba uma mensagem com sucesso, e vice versa.
+        Essa é a função do bootstrap_messages -->
+        <form action="{% url 'contato' %}" method="post" class="form" autocomplete="off">
+        <!-- Enviar para a nossa url de contato -->
+        {% csrf_token %}
+        <!-- É um recurso de segurança
+						 Caso esta variável não seja declarada, o nosso formulário não será válido.
+             Cada novo formulário é gerado um token diferente. Esse tokes é validado com
+						 os dados que estão sendo passados. -->
+        {% bootstrap_form form %}
+        <!-- Estou indicando para o bootstrap aplicar o css(padrão bootstrap) no meu form, a variável lá na view -->
+        
+				{% buttons %}
+        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+        {% endbuttons %}
+				<!-- Definindo nosso botão de envio -->
+        </form>
+    </div>
+
+{% bootstrap_javascript jquery='full' %}
+<!-- Indicando o javascript bootstrap ao nosso código -->
+</body>
+</html>
